@@ -69,6 +69,8 @@ extension View {
 }
 
 // MARK: - Animated Background
+import SwiftUI
+
 struct AnimatedBackground: View {
     @State private var animate = false
     
@@ -76,28 +78,28 @@ struct AnimatedBackground: View {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color(red: 0.03, green: 0.03, blue: 0.12),
-                    Color(red: 0.08, green: 0.04, blue: 0.18),
-                    Color(red: 0.03, green: 0.08, blue: 0.2)
+                    Color(red: 0.02, green: 0.06, blue: 0.10),
+                    Color(red: 0.03, green: 0.12, blue: 0.16),
+                    Color(red: 0.01, green: 0.03, blue: 0.06)
                 ],
                 startPoint: animate ? .topLeading : .bottomLeading,
                 endPoint: animate ? .bottomTrailing : .topTrailing
             )
             
             Circle()
-                .fill(RadialGradient(colors: [Color.purple.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 150))
+                .fill(RadialGradient(colors: [Color.teal.opacity(0.35), .clear], center: .center, startRadius: 0, endRadius: 150))
                 .frame(width: 300, height: 300)
                 .offset(x: animate ? 100 : -100, y: animate ? -150 : 150)
                 .blur(radius: 30)
             
             Circle()
-                .fill(RadialGradient(colors: [Color.blue.opacity(0.25), .clear], center: .center, startRadius: 0, endRadius: 120))
+                .fill(RadialGradient(colors: [Color.cyan.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 120))
                 .frame(width: 250, height: 250)
                 .offset(x: animate ? -80 : 80, y: animate ? 100 : -100)
                 .blur(radius: 25)
             
             Circle()
-                .fill(RadialGradient(colors: [Color.cyan.opacity(0.2), .clear], center: .center, startRadius: 0, endRadius: 100))
+                .fill(RadialGradient(colors: [Color(red: 0.85, green: 0.65, blue: 0.13).opacity(0.15), .clear], center: .center, startRadius: 0, endRadius: 100))
                 .frame(width: 200, height: 200)
                 .offset(x: animate ? 60 : -60, y: animate ? 180 : -50)
                 .blur(radius: 20)
@@ -111,7 +113,6 @@ struct AnimatedBackground: View {
     }
 }
 
-// MARK: - Glass TextField
 struct GlassTextField: View {
     var placeholder: String
     @Binding var text: String
@@ -127,11 +128,11 @@ struct GlassTextField: View {
             if isSecure {
                 SecureField(placeholder, text: $text)
                     .foregroundColor(.white)
-                    .tint(.purple)
+                    .tint(.cyan)
             } else {
                 TextField(placeholder, text: $text)
                     .foregroundColor(.white)
-                    .tint(.purple)
+                    .tint(.cyan)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
             }

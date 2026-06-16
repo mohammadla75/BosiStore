@@ -1,10 +1,3 @@
-//
-//  RegisterView.swift
-//  BosiStore
-//
-//  Created by MAC on 3/2/1405 AP.
-//
-
 import Foundation
 import SwiftUI
 
@@ -18,7 +11,7 @@ struct RegisterView: View {
     @State private var phone = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var acceptedTerms = false // New State
+    @State private var acceptedTerms = false
     
     @State private var showTerms = false
     @State private var showPrivacy = false
@@ -61,7 +54,7 @@ struct RegisterView: View {
         VStack(spacing: 12) {
             Image(systemName: "person.badge.plus")
                 .font(.system(size: 44))
-                .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .foregroundStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
             
             Text(localization.str("register"))
                 .font(.system(size: 26, weight: .bold))
@@ -93,10 +86,9 @@ struct RegisterView: View {
             } label: {
                 Image(systemName: acceptedTerms ? "checkmark.square.fill" : "square")
                     .font(.system(size: 20))
-                    .foregroundStyle(acceptedTerms ? LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing) : LinearGradient(colors: [.gray, .gray], startPoint: .top, endPoint: .bottom))
+                    .foregroundStyle(acceptedTerms ? LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing) : LinearGradient(colors: [.gray, .gray], startPoint: .top, endPoint: .bottom))
             }
             
-            // Wrap text nicely
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
                     Text(localization.str("accept_terms"))
@@ -106,7 +98,7 @@ struct RegisterView: View {
                     Button { showTerms = true } label: {
                         Text(localization.str("terms"))
                             .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
                 }
                 
@@ -145,7 +137,6 @@ struct RegisterView: View {
                 confirmPassword: confirmPassword
             )
             if success {
-                // dismissed via alert
             }
         } label: {
             HStack(spacing: 10) {
@@ -159,11 +150,11 @@ struct RegisterView: View {
             .padding(.vertical, 16)
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(LinearGradient(colors: acceptedTerms ? [.green, .cyan] : [.gray.opacity(0.5), .gray.opacity(0.5)], startPoint: .leading, endPoint: .trailing))
-                    .shadow(color: acceptedTerms ? .green.opacity(0.4) : .clear, radius: 15, x: 0, y: 8)
+                    .fill(LinearGradient(colors: acceptedTerms ? [.teal, .cyan] : [.gray.opacity(0.5), .gray.opacity(0.5)], startPoint: .leading, endPoint: .trailing))
+                    .shadow(color: acceptedTerms ? .teal.opacity(0.4) : .clear, radius: 15, x: 0, y: 8)
             )
         }
-        .disabled(!acceptedTerms) // Disable button visually and functionally
+        .disabled(!acceptedTerms)
         .opacity(animateIn ? 1 : 0)
     }
     
@@ -175,7 +166,7 @@ struct RegisterView: View {
                 Text(localization.str("has_account"))
                     .foregroundColor(.gray)
                 Text(localization.str("login"))
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .fontWeight(.semibold)
             }
             .font(.system(size: 14))

@@ -105,7 +105,7 @@ struct AddAddressView: View {
                     .font(.system(size: 14))
                     .foregroundColor(.white)
             }
-            .tint(.purple)
+            .tint(.teal)
             .padding(.horizontal, 4)
         }
     }

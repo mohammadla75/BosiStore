@@ -81,6 +81,10 @@ struct EnStrings {
         "and": "and",
         "terms_error": "You must accept the terms and conditions to register.",
         "terms_content": "By registering and using the Bosi Store app, you agree to abide by our store policies. All products are guaranteed to be authentic. Returns are accepted within 14 days of purchase provided the item is in its original condition. The store reserves the right to cancel any order in case of pricing errors or inventory issues.",
-        "privacy_content": "We take your privacy and security very seriously. All your personal data, including your location, addresses, and contact information, are securely stored locally on your device in this version. We do not share, sell, or distribute your personal information to any third parties. Your data remains strictly confidential and protected."
+        "privacy_content": "We take your privacy and security very seriously. All your personal data, including your location, addresses, and contact information, are securely stored locally on your device in this version. We do not share, sell, or distribute your personal information to any third parties. Your data remains strictly confidential and protected.",
+        "danger_zone": "Danger Zone",
+        "delete_account": "Delete Account",
+        "delete_confirm_title": "Are you sure?",
+        "delete_confirm_msg": "This action cannot be undone. All your data and addresses will be permanently deleted.",
     ]
 }

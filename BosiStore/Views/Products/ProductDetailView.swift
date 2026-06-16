@@ -12,6 +12,11 @@ struct ProductDetailView: View {
     @State private var showReviews = false
     @State private var showAddReview = false
     
+    @State private var showContactPicker = false
+    @State private var showMessageComposer = false
+    @State private var showSimulatorWarning = false
+    @State private var selectedPhone: String? = nil
+
     var body: some View {
         ZStack {
             AnimatedBackground()
@@ -41,6 +46,25 @@ struct ProductDetailView: View {
                 .zIndex(5)
             }
         }
+        .sheet(isPresented: $showContactPicker) {
+            ContactPicker(selectedPhone: $selectedPhone, showMessageComposer: $showMessageComposer, showWarning: $showSimulatorWarning)
+                .ignoresSafeArea()
+        }
+        .sheet(isPresented: $showMessageComposer) {
+            if let phone = selectedPhone {
+                MessageComposer(
+                    phoneNumbers: [phone],
+                    message: "Check out this Bosi item: \(product.name) for just $\(Int(product.discountedPrice))! \n\n\(product.shortDescription)"
+                )
+                .ignoresSafeArea()
+            }
+        }
+        .alert("Device Not Supported", isPresented: $showSimulatorWarning) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("This device or simulator does not support sending SMS messages.")
+        }
+
         .onAppear {
             withAnimation(.easeOut(duration: 0.4).delay(0.1)) { animateIn = true }
         }
@@ -49,47 +73,69 @@ struct ProductDetailView: View {
     }
     
     private var topBar: some View {
-        HStack {
-            Button { close() } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.white)
-                    .frame(width: 34, height: 34)
-                    .background(Circle().fill(.ultraThinMaterial))
-                    .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
+            HStack {
+                Button { close() } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 34, height: 34)
+                        .background(Circle().fill(.ultraThinMaterial))
+                        .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
+                }
+                Button {} label: {
+                    Text("")
+                        .frame(width: 34, height: 34)
+
+                }
+
+                Spacer()
+                
+                Text(product.category)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .glassBackground(radius: 10)
+                
+                Spacer()
+                
+                HStack(spacing: 12) {
+                    Button { showContactPicker = true } label: {
+                        Image(systemName: "square.and.arrow.up.fill")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 34, height: 34)
+                            .background(Circle().fill(.ultraThinMaterial))
+                            .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
+                    }
+                    
+                    Button {} label: {
+                        Image(systemName: "heart")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 34, height: 34)
+                            .background(Circle().fill(.ultraThinMaterial))
+                            .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
+                    }
+                }
             }
-            Spacer()
-            Text(product.category)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.gray)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
-                .glassBackground(radius: 10)
-            Spacer()
-            Button {} label: {
-                Image(systemName: "heart")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.white)
-                    .frame(width: 34, height: 34)
-                    .background(Circle().fill(.ultraThinMaterial))
-                    .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
-            }
+            .padding(.horizontal, 20)
         }
-        .padding(.horizontal, 20)
-    }
-    
+        
     private var productImage: some View {
         ZStack {
             Circle()
-                .fill(RadialGradient(colors: [.purple.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 120))
+                .fill(RadialGradient(colors: [.teal.opacity(0.35), .clear], center: .center, startRadius: 0, endRadius: 120))
                 .frame(width: 240, height: 240)
                 .blur(radius: 25)
             
-            Image(systemName: product.imageName)
-                .font(.system(size: 80))
-                .foregroundStyle(LinearGradient(colors: [.purple, .cyan, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
+            Image(product.imageName)
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding(8)
                 .matchedGeometryEffect(id: "img_\(product.id)", in: namespace)
-                .shadow(color: .purple.opacity(0.5), radius: 30)
+                .shadow(color: .teal.opacity(0.4), radius: 30)
         }
         .frame(height: 200)
     }
@@ -109,7 +155,7 @@ struct ProductDetailView: View {
                 ForEach(0..<5) { i in
                     Image(systemName: i < Int(product.rating) ? "star.fill" : "star")
                         .font(.system(size: 12))
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
                 }
                 Text("\(product.rating, specifier: "%.1f")")
                     .font(.system(size: 12, weight: .semibold))
@@ -140,7 +186,7 @@ struct ProductDetailView: View {
                             .background(
                                 Capsule().fill(
                                     selectedColor == index ?
-                                    AnyShapeStyle(LinearGradient(colors: [.purple, .blue], startPoint: .leading, endPoint: .trailing)) :
+                                    AnyShapeStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .leading, endPoint: .trailing)) :
                                     AnyShapeStyle(Color.white.opacity(0.08))
                                 )
                             )
@@ -190,7 +236,7 @@ struct ProductDetailView: View {
         VStack(spacing: 6) {
             Image(systemName: icon)
                 .font(.system(size: 16))
-                .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .top, endPoint: .bottom))
+                .foregroundStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .top, endPoint: .bottom))
             Text(text)
                 .font(.system(size: 9, weight: .medium))
                 .foregroundColor(.gray)
@@ -204,7 +250,7 @@ struct ProductDetailView: View {
             Button { showReviews = true } label: {
                 HStack {
                     Image(systemName: "message.fill")
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                     Text(localization.str("reviews"))
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.white)
@@ -223,7 +269,7 @@ struct ProductDetailView: View {
                     .frame(width: 48, height: 48)
                     .background(
                         RoundedRectangle(cornerRadius: 14)
-                            .fill(LinearGradient(colors: [.purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .fill(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
                     )
             }
         }
@@ -248,7 +294,7 @@ struct ProductDetailView: View {
                 }
                 Text("$\(product.discountedPrice, specifier: "%.0f")")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundStyle(LinearGradient(colors: [.green, .cyan], startPoint: .leading, endPoint: .trailing))
+                    .foregroundStyle(LinearGradient(colors: [Color(red: 1.0, green: 0.84, blue: 0.0), .orange], startPoint: .leading, endPoint: .trailing))
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
@@ -257,7 +303,7 @@ struct ProductDetailView: View {
                     .foregroundColor(.gray)
                 Text("$\(product.price - product.discountedPrice, specifier: "%.0f")")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.green)
+                    .foregroundColor(.teal)
             }
         }
         .padding(18)
@@ -280,10 +326,10 @@ struct ProductDetailView: View {
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(LinearGradient(
-                        colors: cartManager.isInCart(product: product) ? [.green, .cyan] : [.purple, .blue],
+                        colors: cartManager.isInCart(product: product) ? [.green, .teal] : [.teal, .cyan],
                         startPoint: .leading, endPoint: .trailing
                     ))
-                    .shadow(color: .purple.opacity(0.4), radius: 15, x: 0, y: 8)
+                    .shadow(color: .teal.opacity(0.4), radius: 15, x: 0, y: 8)
             )
         }
         .padding(.horizontal, 16)

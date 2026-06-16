@@ -50,12 +50,12 @@ struct PolicyView: View {
                             Spacer()
                             ZStack {
                                 Circle()
-                                    .fill(RadialGradient(colors: [.purple.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 50))
+                                    .fill(RadialGradient(colors: [.teal.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 50))
                                     .frame(width: 100, height: 100)
                                 
                                 Image(systemName: titleKey == "privacy" ? "lock.shield.fill" : "doc.text.fill")
                                     .font(.system(size: 40))
-                                    .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    .foregroundStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
                             }
                             Spacer()
                         }

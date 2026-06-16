@@ -1,10 +1,3 @@
-//
-//  CartView.swift
-//  BosiStore
-//
-//  Created by MAC on 3/2/1405 AP.
-//
-
 import Foundation
 import SwiftUI
 
@@ -42,7 +35,7 @@ struct CartView: View {
         VStack(spacing: 20) {
             Image(systemName: "cart")
                 .font(.system(size: 60))
-                .foregroundStyle(LinearGradient(colors: [.purple.opacity(0.5), .cyan.opacity(0.5)], startPoint: .top, endPoint: .bottom))
+                .foregroundStyle(LinearGradient(colors: [.teal.opacity(0.5), .cyan.opacity(0.5)], startPoint: .top, endPoint: .bottom))
             Text(localization.str("empty_cart"))
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.white)
@@ -128,7 +121,7 @@ struct CartView: View {
                     Spacer()
                     Text("$\(cartManager.totalPrice, specifier: "%.0f")")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundStyle(LinearGradient(colors: [.green, .cyan], startPoint: .leading, endPoint: .trailing))
+                        .foregroundStyle(LinearGradient(colors: [Color(red: 1.0, green: 0.84, blue: 0.0), .orange], startPoint: .leading, endPoint: .trailing))
                 }
             }
             
@@ -146,8 +139,8 @@ struct CartView: View {
                 .padding(.vertical, 16)
                 .background(
                     RoundedRectangle(cornerRadius: 14)
-                        .fill(LinearGradient(colors: [.purple, .blue, .cyan], startPoint: .leading, endPoint: .trailing))
-                        .shadow(color: .purple.opacity(0.4), radius: 15, x: 0, y: 8)
+                        .fill(LinearGradient(colors: [.teal, .cyan], startPoint: .leading, endPoint: .trailing))
+                        .shadow(color: .teal.opacity(0.4), radius: 15, x: 0, y: 8)
                 )
             }
         }
@@ -164,7 +157,6 @@ struct CartView: View {
     }
 }
 
-// MARK: - Cart Item Row
 struct CartItemRow: View {
     let item: CartItem
     @EnvironmentObject var cartManager: CartManager
@@ -175,9 +167,11 @@ struct CartItemRow: View {
                 .fill(LinearGradient(colors: [.white.opacity(0.08), .white.opacity(0.02)], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .frame(width: 64, height: 64)
                 .overlay(
-                    Image(systemName: item.product.imageName)
-                        .font(.system(size: 26))
-                        .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    Image(item.product.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(8)
                 )
             
             VStack(alignment: .leading, spacing: 4) {
@@ -187,7 +181,7 @@ struct CartItemRow: View {
                     .lineLimit(1)
                 Text("$\(item.product.discountedPrice, specifier: "%.0f")")
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(LinearGradient(colors: [.green, .cyan], startPoint: .leading, endPoint: .trailing))
+                    .foregroundStyle(LinearGradient(colors: [Color(red: 1.0, green: 0.84, blue: 0.0), .orange], startPoint: .leading, endPoint: .trailing))
             }
             
             Spacer()
@@ -220,7 +214,7 @@ struct CartItemRow: View {
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.white)
                         .frame(width: 26, height: 26)
-                        .background(Circle().fill(LinearGradient(colors: [.purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)))
+                        .background(Circle().fill(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing)))
                 }
             }
         }

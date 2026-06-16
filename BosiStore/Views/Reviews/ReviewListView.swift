@@ -72,7 +72,7 @@ struct ReviewListView: View {
                     .frame(width: 32, height: 32)
                     .background(
                         Circle().fill(LinearGradient(
-                            colors: [.purple, .blue],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
@@ -102,7 +102,7 @@ struct ReviewListView: View {
             HStack {
                 Circle()
                     .fill(LinearGradient(
-                        colors: [.purple, .blue],
+                        colors: [.teal, .blue],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ))
@@ -147,7 +147,7 @@ struct ReviewListView: View {
 //                            mediaThumb(icon: "photo.fill", color: .blue)
 //                        }
 //                        ForEach(videos, id: \.self) { _ in
-//                            mediaThumb(icon: "video.fill", color: .purple)
+//                            mediaThumb(icon: "video.fill", color: .teal)
 //                        }
 //                    }
 //                }

@@ -49,12 +49,12 @@ struct LoginView: View {
         VStack(spacing: 12) {
             ZStack {
                 Circle()
-                    .fill(RadialGradient(colors: [.purple.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 60))
+                    .fill(RadialGradient(colors: [.teal.opacity(0.35), .clear], center: .center, startRadius: 0, endRadius: 60))
                     .frame(width: 120, height: 120)
                 
                 Image(systemName: "bag.fill")
                     .font(.system(size: 44))
-                    .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .foregroundStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
             }
             
             Text(localization.str("app_name"))
@@ -97,8 +97,8 @@ struct LoginView: View {
             .padding(.vertical, 16)
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(LinearGradient(colors: [.purple, .blue], startPoint: .leading, endPoint: .trailing))
-                    .shadow(color: .purple.opacity(0.4), radius: 15, x: 0, y: 8)
+                    .fill(LinearGradient(colors: [.teal, .cyan], startPoint: .leading, endPoint: .trailing))
+                    .shadow(color: .teal.opacity(0.4), radius: 15, x: 0, y: 8)
             )
         }
         .opacity(animateIn ? 1 : 0)
@@ -112,7 +112,7 @@ struct LoginView: View {
                 Text(localization.str("no_account"))
                     .foregroundColor(.gray)
                 Text(localization.str("register"))
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .fontWeight(.semibold)
             }
             .font(.system(size: 14))

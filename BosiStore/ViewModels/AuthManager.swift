@@ -13,6 +13,7 @@ final class AuthManager: ObservableObject {
     
     init() {
         loadSession()
+        setupTestAccount() // Ensure test account is created on app launch
     }
     
     // MARK: - Register
@@ -117,6 +118,20 @@ final class AuthManager: ObservableObject {
         updateStoredUser(user)
     }
     
+    // MARK: - Delete Account (New)
+    
+    func deleteAccount() {
+        guard let current = currentUser else { return }
+        
+        var users = loadAllUsers()
+        // Remove the current user from the local database
+        users.removeAll { $0.id == current.id }
+        saveAllUsers(users)
+        
+        // Log the user out completely
+        logout()
+    }
+    
     // MARK: - Private Persistence Methods
     
     private func saveAllUsers(_ users: [User]) {
@@ -158,6 +173,25 @@ final class AuthManager: ObservableObject {
         if let user = users.first(where: { $0.id == userId }) {
             currentUser = user
             isAuthenticated = true
+        }
+    }
+    
+    // MARK: - Test Account Setup (New)
+    
+    private func setupTestAccount() {
+        let testEmail = "test@test.com"
+        var users = loadAllUsers()
+        
+        // Create the test account if it does not exist already
+        if !users.contains(where: { $0.email.lowercased() == testEmail }) {
+            let testUser = User(
+                fullName: "Descusr",
+                email: testEmail,
+                phone: "1234567890",
+                password: "123"
+            )
+            users.append(testUser)
+            saveAllUsers(users)
         }
     }
 }

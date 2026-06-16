@@ -65,7 +65,7 @@ struct ProductListView: View {
                 .foregroundColor(.gray)
             TextField(localization.str("search"), text: $searchText)
                 .foregroundColor(.white)
-                .tint(.purple)
+                .tint(.teal)
             if !searchText.isEmpty {
                 Button { searchText = "" } label: {
                     Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
@@ -81,7 +81,7 @@ struct ProductListView: View {
     private var categories: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(["All", "Audio", "Computers", "Mobile", "Wearable", "Tablets", "Accessories"], id: \.self) { cat in
+                ForEach(["All", "Loose Stones", "Rings", "Necklaces", "Bracelets", "Accessories", "Collectibles"], id: \.self) { cat in
                     let isActive = (cat == "All" && searchText.isEmpty) || searchText == cat
                     Text(cat)
                         .font(.system(size: 12, weight: .semibold))
@@ -89,7 +89,7 @@ struct ProductListView: View {
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
                         .background(
-                            Capsule().fill(isActive ? AnyShapeStyle(LinearGradient(colors: [.purple, .blue], startPoint: .leading, endPoint: .trailing)) : AnyShapeStyle(Color.white.opacity(0.08)))
+                            Capsule().fill(isActive ? AnyShapeStyle(LinearGradient(colors: [.teal, .cyan], startPoint: .leading, endPoint: .trailing)) : AnyShapeStyle(Color.white.opacity(0.08)))
                         )
                         .overlay(Capsule().stroke(Color.white.opacity(isActive ? 0 : 0.15), lineWidth: 1))
                         .onTapGesture {

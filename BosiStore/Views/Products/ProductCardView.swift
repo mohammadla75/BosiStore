@@ -12,9 +12,11 @@ struct ProductCardView: View {
                     .fill(LinearGradient(colors: [.white.opacity(0.08), .white.opacity(0.02)], startPoint: .topLeading, endPoint: .bottomTrailing))
                     .frame(height: 110)
                     .overlay(
-                        Image(systemName: product.imageName)
-                            .font(.system(size: 40))
-                            .foregroundStyle(LinearGradient(colors: [.purple, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        Image(product.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(8)
                             .matchedGeometryEffect(id: "img_\(product.id)", in: namespace)
                     )
                 
@@ -44,8 +46,8 @@ struct ProductCardView: View {
                 HStack {
                     Text("$\(product.discountedPrice, specifier: "%.0f")")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(LinearGradient(colors: [.green, .cyan], startPoint: .leading, endPoint: .trailing))
-                    
+                        .foregroundStyle(LinearGradient(colors: [Color(red: 1.0, green: 0.84, blue: 0.0), Color.orange], startPoint: .leading, endPoint: .trailing))
+
                     Spacer()
                     
                     Button {
@@ -57,7 +59,7 @@ struct ProductCardView: View {
                             .frame(width: 24, height: 24)
                             .background(
                                 Circle().fill(
-                                    LinearGradient(colors: cartManager.isInCart(product: product) ? [.green, .cyan] : [.purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    LinearGradient(colors: cartManager.isInCart(product: product) ? [.green, .teal] : [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing)
                                 )
                             )
                     }
@@ -67,7 +69,7 @@ struct ProductCardView: View {
                     ForEach(0..<5) { i in
                         Image(systemName: i < Int(product.rating) ? "star.fill" : "star")
                             .font(.system(size: 8))
-                            .foregroundColor(.yellow)
+                            .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
                     }
                 }
             }

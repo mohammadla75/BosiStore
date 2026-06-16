@@ -65,7 +65,7 @@ struct AddressListView: View {
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.white)
                     .frame(width: 32, height: 32)
-                    .background(Circle().fill(LinearGradient(colors: [.purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)))
+                    .background(Circle().fill(LinearGradient(colors: [.teal, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing)))
             }
         }
         .padding(.horizontal, 20)

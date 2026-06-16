@@ -43,7 +43,7 @@ struct MainTabView: View {
                             lineWidth: 1
                         )
                 )
-                .shadow(color: .purple.opacity(0.3), radius: 20, x: 0, y: 10)
+                .shadow(color: .teal.opacity(0.3), radius: 20, x: 0, y: 10)
         )
         .padding(.horizontal, 30)
         .padding(.bottom, 10)
@@ -59,7 +59,7 @@ struct MainTabView: View {
                 ZStack(alignment: .topTrailing) {
                     Image(systemName: icon)
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(selectedTab == tag ? .purple : .gray)
+                        .foregroundColor(selectedTab == tag ? .teal : .gray)
                         .scaleEffect(selectedTab == tag ? 1.15 : 1.0)
                     
                     if badge > 0 {

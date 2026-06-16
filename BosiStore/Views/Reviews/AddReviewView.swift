@@ -102,7 +102,7 @@ struct AddReviewView: View {
                         )
                 )
                 .foregroundColor(.white)
-                .tint(.purple)
+                .tint(.teal)
                 .scrollContentBackground(.hidden)
         }
     }
@@ -127,7 +127,7 @@ struct AddReviewView: View {
                     maxSelectionCount: 2,
                     matching: .videos
                 ) {
-                    mediaButton(icon: "video.fill", text: localization.str("add_video"), color: .purple)
+                    mediaButton(icon: "video.fill", text: localization.str("add_video"), color: .teal)
                 }
             }
             
@@ -189,12 +189,8 @@ struct AddReviewView: View {
             .padding(.vertical, 16)
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(LinearGradient(
-                        colors: [.purple, .blue],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    ))
-                    .shadow(color: .purple.opacity(0.4), radius: 15, x: 0, y: 8)
+                    .fill(LinearGradient(colors: [.teal, .cyan], startPoint: .leading, endPoint: .trailing))
+                    .shadow(color: .teal.opacity(0.4), radius: 15, x: 0, y: 8)
             )
         }
     }

@@ -53,7 +53,7 @@ struct ProfileView: View {
     private var profileHeader: some View {
         VStack(spacing: 14) {
             Circle()
-                .fill(LinearGradient(colors: [.purple.opacity(0.6), .blue.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .fill(LinearGradient(colors: [.teal.opacity(0.6), .cyan.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .frame(width: 80, height: 80)
                 .overlay(
                     Text(String(authManager.currentUser?.fullName.prefix(1) ?? "U"))
@@ -84,7 +84,7 @@ struct ProfileView: View {
             menuRow(icon: "gearshape.fill", title: localization.str("settings"), color: .gray) {
                 showSettings = true
             }
-            menuRow(icon: "bag.fill", title: localization.str("app_name"), color: .purple) {}
+            menuRow(icon: "bag.fill", title: localization.str("app_name"), color: .teal) {}
         }
     }
     
